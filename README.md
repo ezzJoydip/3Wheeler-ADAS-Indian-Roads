@@ -23,3 +23,8 @@ Upcoming integration modules:
 • Monocular depth estimation using MiDaS
 • ROI-based collision warning logic
 • Edge deployment optimization using OpenVINO / ONNX
+## Sample Output
+
+Example object detection output from prototype ADAS perception pipeline:
+
+outputs/sample_detection.png
