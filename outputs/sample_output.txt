@@ -1,0 +1,1 @@
+Sample output images from detection pipeline will be stored here.
