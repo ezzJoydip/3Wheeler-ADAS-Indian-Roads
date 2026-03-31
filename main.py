@@ -1,9 +1,13 @@
+from ultralytics import YOLO
 import cv2
-import numpy as np
 
-print("Starting 3-Wheeler ADAS Prototype...")
+# Load YOLO pretrained segmentation model
+model = YOLO("yolov8n.pt")  # lightweight detection model
 
+# Start webcam
 cap = cv2.VideoCapture(0)
+
+print("Starting 3-Wheeler ADAS Detection Pipeline...")
 
 while True:
     ret, frame = cap.read()
@@ -11,17 +15,17 @@ while True:
     if not ret:
         break
 
-    cv2.putText(frame,
-                "ADAS STATUS: SAFE",
-                (50, 50),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                1,
-                (0,255,0),
-                2)
+    # Run object detection
+    results = model(frame)
 
-    cv2.imshow("3-Wheeler ADAS Output", frame)
+    # Plot detections on frame
+    annotated_frame = results[0].plot()
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    # Display output
+    cv2.imshow("ADAS Object Detection Output", annotated_frame)
+
+    # Press q to exit
+    if cv2.waitKey(1) & 0xFF == ord("q"):
         break
 
 cap.release()
