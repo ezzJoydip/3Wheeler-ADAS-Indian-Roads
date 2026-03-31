@@ -1,30 +1,57 @@
-Real-time 3-Wheeler ADAS system using YOLO11-seg and MiDaS depth estimation for collision warning on unstructured Indian roads with edge-deployable pipeline.
-Repository Structure:
+# 3Wheeler-ADAS-Indian-Roads
 
-main.py → prototype inference pipeline
-requirements.txt → dependencies
-models/ → placeholder for YOLO11-seg and MiDaS weights
-ppt.pdf → proposal presentation
+## Project Overview
+This project proposes a real-time Advanced Driver Assistance System (ADAS) designed specifically for 3-wheelers operating in unstructured Indian road environments. The system detects surrounding objects, estimates relative depth using monocular vision, and generates collision warning alerts (Safe / Warning / Stop) for driver assistance using edge-deployable hardware.
 
-Future Work:
+## Model Architecture
+Pipeline:
 
-Integration of real-time YOLO11-seg inference
-MiDaS depth estimation deployment
-ROI-based collision detection logic
-Edge deployment using OpenVINO / ONNX runtime
+Camera Input
+→ CLAHE preprocessing
+→ YOLO object detection / segmentation
+→ MiDaS monocular depth estimation
+→ ROI-based collision warning logic
+→ HUD alert output
 
-Current Implementation Status
+The detection module currently uses YOLOv8 lightweight model for real-time inference.
 
-This repository currently includes a working YOLO-based real-time object detection pipeline as a prototype perception module.
+Future modules include:
+- YOLO11-seg drivable area segmentation
+- MiDaS depth estimation integration
+- OpenVINO edge deployment optimization
 
-Upcoming integration modules:
+## Dataset Used
+The system leverages:
 
-• Drivable area segmentation (YOLO11-seg)
-• Monocular depth estimation using MiDaS
-• ROI-based collision warning logic
-• Edge deployment optimization using OpenVINO / ONNX
-## Sample Output
+- India Driving Dataset (IDD)
+- nuScenes dataset
+- COCO pretrained weights for transfer learning
 
-Example object detection output from prototype ADAS perception pipeline:
+These datasets help adapt perception models to Indian road scenarios including pedestrians, animals, and mixed traffic conditions.
 
-outputs/sample_detection.png
+## Setup & Installation Instructions
+
+Install dependencies:
+
+pip install -r requirements.txt
+
+## How to Run the Code
+
+Run:
+
+python main.py
+
+This launches the real-time detection pipeline using webcam input.
+
+Press **q** to exit.
+
+## Example Outputs / Results
+
+Example detection outputs are available in:
+
+outputs/sample_output.txt
+
+Future outputs include:
+- bounding box detection overlays
+- segmentation masks
+- collision warning visualization frames
